@@ -19,13 +19,14 @@ func main() {
 
 	fmt.Println("Valor inserido:", comando)
 
-	if comando == 1 {
+	switch comando {
+	case 1:
 		fmt.Println("Monitorando...")
-	} else if comando == 2 {
+	case 2:
 		fmt.Println("Exibindo Logs...")
-	} else if comando == 0 {
-		fmt.Println("Saindo do programa...")
-	} else {
+	case 0:
+		fmt.Println("Saindo do programa")
+	default:
 		fmt.Println("Não conheço esse comando")
 	}
 }
