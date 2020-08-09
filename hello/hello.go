@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"net/http"
 	"os"
 )
 
@@ -52,12 +51,19 @@ func leComando() int {
 
 func iniciarMonitoramento() {
 	fmt.Println("Monitorando...")
-	site := "https://random-status-code.herokuapp.com"
-	resp, _ := http.Get(site)
+	var sites [4]string
+	sites[0] = "https://random-status-code.herokuapp.com"
+	sites[1] = "https://random-status-code.herokuapp.com"
+	sites[2] = "https://random-status-code.herokuapp.com"
+	sites[3] = "https://random-status-code.herokuapp.com"
+	fmt.Println(sites)
+	// for sites {
+	// 	resp, _ := http.Get(site)
 
-	if resp.StatusCode == 200 {
-		fmt.Println("Site:", site, "foi carregado com sucesso!")
-	} else {
-		fmt.Println("Site:", site, "esta com problemas. Status Code:", resp.StatusCode)
-	}
+	// 	if resp.StatusCode == 200 {
+	// 		fmt.Println("Site:", site, "foi carregado com sucesso!")
+	// 	} else {
+	// 		fmt.Println("Site:", site, "esta com problemas. Status Code:", resp.StatusCode)
+	// 	}
+	// }
 }
