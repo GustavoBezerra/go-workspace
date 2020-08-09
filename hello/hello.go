@@ -2,11 +2,15 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"os"
+	"time"
 )
 
-func main() {
+const monitoramentos = 3
+const delay = 2
 
+func main() {
 	exibeIntroducao()
 
 	for {
@@ -51,19 +55,43 @@ func leComando() int {
 
 func iniciarMonitoramento() {
 	fmt.Println("Monitorando...")
-	var sites [4]string
-	sites[0] = "https://random-status-code.herokuapp.com"
-	sites[1] = "https://random-status-code.herokuapp.com"
-	sites[2] = "https://random-status-code.herokuapp.com"
-	sites[3] = "https://random-status-code.herokuapp.com"
-	fmt.Println(sites)
-	// for sites {
-	// 	resp, _ := http.Get(site)
+	sites := []string{"https://random-status-code.herokuapp.com", "https://random-status-code.herokuapp.com", "https://random-status-code.herokuapp.com"}
 
-	// 	if resp.StatusCode == 200 {
-	// 		fmt.Println("Site:", site, "foi carregado com sucesso!")
-	// 	} else {
-	// 		fmt.Println("Site:", site, "esta com problemas. Status Code:", resp.StatusCode)
-	// 	}
-	// }
+	for i := 0; i < monitoramentos; i++ {
+		for _, site := range sites {
+			testaSite(site)
+		}
+		fmt.Println("")
+		if i != monitoramentos-1 {
+			time.Sleep(delay * time.Second)
+		}
+	}
+}
+
+func testaSite(site string) {
+	resp, _ := http.Get(site)
+	if resp.StatusCode == 200 {
+		fmt.Println("Site:", site, "foi carregado com sucesso! Status Code:", resp.StatusCode)
+	} else {
+		fmt.Println("Site:", site, "está fora do ar! Status Code:", resp.StatusCode)
+	}
+}
+
+func testeDeSlices() {
+	teste := []string{}
+	fmt.Println("Itens:", teste, ". Length:", len(teste), ". Capacidade:", cap(teste))
+	teste = append(teste, "eae")
+	fmt.Println("Itens:", teste, ". Length:", len(teste), ". Capacidade:", cap(teste))
+	teste = append(teste, "eae")
+	fmt.Println("Itens:", teste, ". Length:", len(teste), ". Capacidade:", cap(teste))
+	teste = append(teste, "eae")
+	fmt.Println("Itens:", teste, ". Length:", len(teste), ". Capacidade:", cap(teste))
+	nomes := []string{"https://random-status-code.herokuapp.com", "https://www.alura.com.br", "https://www.caelum.com.br"}
+	fmt.Println("Itens:", nomes, ". Length:", len(nomes), ". Capacidade:", cap(nomes))
+	nomes = append(nomes, "Novo")
+	fmt.Println("Itens:", nomes, ". Length:", len(nomes), ". Capacidade:", cap(nomes))
+	nomes = append(nomes, "Novo2", "Novo3")
+	fmt.Println("Itens:", nomes, ". Length:", len(nomes), ". Capacidade:", cap(nomes))
+	nomes = append(nomes, "Novo4")
+	fmt.Println("Itens:", nomes, ". Length:", len(nomes), ". Capacidade:", cap(nomes))
 }
