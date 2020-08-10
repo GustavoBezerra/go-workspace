@@ -128,5 +128,7 @@ func leSitesDoArquivo() []string {
 		}
 	}
 
+	arquivo.Close()
+
 	return sites
 }
