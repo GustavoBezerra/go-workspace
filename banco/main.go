@@ -16,4 +16,12 @@ func main() {
 	fmt.Println(contaSoComNome)
 	fmt.Println(contaDoGustavo)
 	fmt.Println(contaDaLeticia)
+
+	var contaDaMae *ContaCorrente
+	contaDaMae = new(ContaCorrente)
+	contaDaMae.titular = "Mae"
+	contaDaMae.saldo = 50
+
+	fmt.Println(contaDaMae)
+	fmt.Println(*contaDaMae)
 }
